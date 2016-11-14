@@ -1,2 +1,4 @@
 # jessi
-MJU team project
+
+team project from MJU.
+
