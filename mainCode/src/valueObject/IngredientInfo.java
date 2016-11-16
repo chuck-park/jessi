@@ -12,7 +12,7 @@ public class IngredientInfo {
 	  this.ingredientID=id;
 	  this.ingredientName = ingredientName;
 	 }
-	 
+/*	 
 	public IngredientInfo (int id, String ingredientName, String time, String room, String professor){
 		this.ingredientID = id;
 		this.ingredientName = ingredientName;
@@ -20,7 +20,7 @@ public class IngredientInfo {
 		this.ingredientRoom = room;
 		this.ingredientProfessor = professor;
 	}
-	
+*/
 	public int getIngredientID() {
 		return ingredientID;
 	}

@@ -52,13 +52,7 @@ public class Type {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		return typelist;
-	}
-	
-	public void putList(Vector<TypeInfo> typelist){
-		
 	}
 }
 

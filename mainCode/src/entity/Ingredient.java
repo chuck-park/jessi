@@ -7,7 +7,6 @@ import valueObject.*;
 
 public class Ingredient {
 	private Vector<IngredientInfo> ingredientlist;
-	
 	public Ingredient(){
 		try {
 			BufferedWriter fileWriter = new BufferedWriter(new FileWriter("ingredient.txt"));
@@ -112,18 +111,13 @@ public class Ingredient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
 		return ingredientlist;
 	}
 
-	public void putList(Vector<IngredientInfo> lecutrelist){
-	}
-
-
-	public void setSelectlist(int ingredientID) {
-		// TODO Auto-generated method stub
+	public void setSelectlist(int ingredientID) { // 수정필요!
 		try {
+		  
+		  /*
 			BufferedWriter fileWriter = new BufferedWriter(new FileWriter("selectlist.txt", true));
 			for(int i=0; i < ingredientlist.size(); i++){
 				if(ingredientlist.get(i).getIngredientID()==ingredientID){
@@ -134,7 +128,7 @@ public class Ingredient {
 				}
 			
 			fileWriter.close();
-			
+			*/
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

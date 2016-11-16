@@ -29,9 +29,7 @@ public class IngredientManager {
 	}
 	
 	public Vector<IngredientInfo> getList() {
-		// TODO Auto-generated method stub
 		ingredientlist = ingredient.getList();
-		
 		return ingredientlist;
 	}
 	
