@@ -14,6 +14,5 @@ public class TypeManager {
 		Vector<TypeInfo> typelist = type.getList();
 		return typelist;
 	}
-
 }
 
