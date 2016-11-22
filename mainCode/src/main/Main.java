@@ -17,7 +17,7 @@ public class Main {
 			typeView.showTypeList();
 			typeView.getTypeID(scanner);
 			IngredientView ingredientView = new IngredientView();
-			ingredientView.selectIngredient(scanner);
+			ingredientView.selectIngredient(scanner); // view->control->entity(valueObjectÇüÅÂ·Î)
 			/*
 			HomeworkView homesubmitView = new HomeworkView();
 			homesubmitView.getSubmitList(scanner);

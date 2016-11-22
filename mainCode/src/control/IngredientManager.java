@@ -1,4 +1,5 @@
 package control;
+import java.io.*;
 import java.util.Vector;
 
 import entity.Ingredient;
@@ -17,21 +18,17 @@ public class IngredientManager {
 		selectlist = new Vector<IngredientInfo>();
 		
 	}
-	public Vector<IngredientInfo> getSelectlist() {
+	public Vector<IngredientInfo> getSelectlist() throws IOException {
 		this.selectlist = ingredient.getSelectlist();
 		return selectlist;
-		
 	}
 	
-	public void setSelectlist(int ingredientID) {
+	public void setSelectlist(int ingredientID){
 		ingredient.setSelectlist(ingredientID);
-		
 	}
 	
 	public Vector<IngredientInfo> getList() {
-		// TODO Auto-generated method stub
 		ingredientlist = ingredient.getList();
-		
 		return ingredientlist;
 	}
 	
