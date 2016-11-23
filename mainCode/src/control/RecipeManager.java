@@ -12,6 +12,14 @@ public class RecipeManager {
     this.recipe = new Recipe();
   }
   
+  public int getLikelist(){
+	  return recipe.getLikelist();
+  }
+  
+  public void sortLike(){
+	  recipe.sortLike();
+  }
+  
   public void search(Vector<IngredientInfo> selectlist){
     recipe.search(selectlist);
   }

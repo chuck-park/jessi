@@ -35,5 +35,7 @@ public class IngredientView {
 		}     
 		this.selectList = ingredientManager.getSelectlist();
     recipeManager.search(this.selectList);
+    recipeManager.getLikelist();
+    recipeManager.sortLike();
 	}
 }
