@@ -32,10 +32,10 @@ public class IngredientView {
 			System.out.print("\n재료를 선택하세요(완료하였으면 0 입력): ");
 			int ingredientID = scanner.nextInt();
 			ingredientManager.setSelectlist(ingredientID);
-		}     
-		this.selectList = ingredientManager.getSelectlist();
-    recipeManager.search(this.selectList);
-    recipeManager.getLikelist();
-    recipeManager.sortLike();
+		}
+	}
+	
+	public void getSelectlist() throws IOException{
+	  ingredientManager.getSelectlist();
 	}
 }

@@ -19,8 +19,7 @@ public class IngredientManager {
 		
 	}
 	public Vector<IngredientInfo> getSelectlist() throws IOException {
-		this.selectlist = ingredient.getSelectlist();
-		return selectlist;
+	  return this.selectlist = ingredient.getSelectlist();
 	}
 	
 	public void setSelectlist(int ingredientID){

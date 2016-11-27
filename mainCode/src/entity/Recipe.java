@@ -68,22 +68,23 @@ public class Recipe {
     System.out.println(a + "번째 레시피의 count : " + recipelist.get(a).getCount());
   }
   
-  public int getLikelist(){
-	  recipelist.get(0).setLike(4);
+  public int getLikelist(){ // 좋아요가 1이상인 list에 레시피인포 생성
+    // test
+	  recipelist.get(0).setLike(4); 
 	  recipelist.get(1).setLike(5);
 	  recipelist.get(2).setLike(1);
 	  
 	  System.out.println("recipelist size print : " + recipelist.size());
 	  
-	  this.likelist = new Vector <RecipeInfo>(); // 좋아요가 1이상인 list에 레시피인포 생성
+	  this.likelist = new Vector <RecipeInfo>(); 
 	  
-	  for(int x=0; x<recipelist.size();x++){ 
+	  for(int x=0; x<recipelist.size();x++){
 		  if(recipelist.get(x).getLike()!=0){ // list에 좋아요가 0이 아닌 리스트를 넣는다
 			  likelist.add(recipelist.get(x));
-			  System.out.println("likelist "+x + " print : " + likelist.size());
+			  System.out.println("likelist "+ x + " print : " + likelist.size());
 		  }
 	  }
-	  return likelist.size();
+	  return likelist.size(); // 생성된 리스트의 컴포넌트 수를 반환
   }
   
   public void sortLike(){

@@ -115,7 +115,6 @@ public class Ingredient {
   public void setSelectlist(int ingredientID) {
     try {
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter("selectlist.txt", true));
-
       for (int i = 0; i < ingredientlist.size(); i++) {
         if(ingredientID != 0){
           if (ingredientlist.get(i).getIngredientID() == ingredientID) {
@@ -142,7 +141,6 @@ public class Ingredient {
     try {
 
       BufferedReader fileReader = new BufferedReader(new FileReader("selectlist.txt"));
-
       selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
       selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
       selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
