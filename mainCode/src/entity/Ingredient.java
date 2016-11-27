@@ -113,7 +113,7 @@ public class Ingredient {
   }
 
   public void setSelectlist(int ingredientID) {
-    try {
+    try {    
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter("selectlist.txt", true));
       for (int i = 0; i < ingredientlist.size(); i++) {
         if(ingredientID != 0){
@@ -139,7 +139,6 @@ public class Ingredient {
   public Vector<IngredientInfo> getSelectlist() {
     Vector<IngredientInfo> selectlist = new Vector<IngredientInfo>();
     try {
-
       BufferedReader fileReader = new BufferedReader(new FileReader("selectlist.txt"));
       selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
       selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
@@ -153,5 +152,10 @@ public class Ingredient {
       e.printStackTrace();
     }
     return selectlist;
+  }
+  
+  public void clearSelectlist() throws IOException{
+    BufferedWriter fileWriter = new BufferedWriter(new FileWriter("selectlist.txt"));
+    fileWriter.close();
   }
 }

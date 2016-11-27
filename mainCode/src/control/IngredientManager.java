@@ -31,4 +31,7 @@ public class IngredientManager {
 		return ingredientlist;
 	}
 	
+	public void clearSelectlist() throws IOException{
+	  ingredient.clearSelectlist();
+	}
 }

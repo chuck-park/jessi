@@ -38,4 +38,8 @@ public class IngredientView {
 	public void getSelectlist() throws IOException{
 	  ingredientManager.getSelectlist();
 	}
+	
+	public void clearSelectlist() throws IOException{
+	  ingredientManager.clearSelectlist();
+	}
 }

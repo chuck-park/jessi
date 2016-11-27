@@ -16,10 +16,10 @@ public class Main {
 			typeView.showTypeList();
 			typeView.getTypeID(scanner);
 			IngredientView ingredientView = new IngredientView();
+			ingredientView.clearSelectlist(); // 기존 selectlist.txt 초기화
 			ingredientView.selectIngredient(scanner); // view->control->entity(valueObject형태로)
 			RecipeView recipeView = new RecipeView();
 			recipeView.search();
 		}
-		
 	}
 }
