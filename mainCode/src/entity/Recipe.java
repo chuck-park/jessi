@@ -111,7 +111,7 @@ public class Recipe {
 
 	        }
 	    }
-	    System.out.println("하야?");
+	    System.out.println("하야!");
 	}
   
   
