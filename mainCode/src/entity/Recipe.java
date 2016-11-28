@@ -87,10 +87,14 @@ public class Recipe {
   }
   
   public void sortLike(){
-	  System.out.println("print : " + likelist.get(0).getLike());
+	  for(int x=0; x<likelist.size();x++){
+	  System.out.println("before print : " + likelist.get(x).getLike());
+	  }
 	  //quickSort(likelist, 0, likelist.size() );
 	  bubbleSort(likelist);
-	  System.out.println("print : " + likelist.get(0).getLike());
+	  for(int x=0; x<likelist.size();x++){
+	  System.out.println("after print : " + likelist.get(x).getLike());
+	  }
 	  
   }
   
@@ -102,7 +106,7 @@ public class Recipe {
 	    for (int i = 0; i < n; i++) {
 	        for (int j = 1; j < (n - i); j++) {
 
-	            if (likelist.get(j-1).getLike() > likelist.get(j).getLike()) {
+	            if (likelist.get(j-1).getLike() < likelist.get(j).getLike()) {
 	            	temp.add(0, likelist.get(j-1));
 	            	  likelist.add(j-1, likelist.get(j));
 	            	  likelist.add(j, temp.get(0));
@@ -110,6 +114,7 @@ public class Recipe {
 
 	        }
 	    }
+	    System.out.println("?");
 	}
   
   
