@@ -1,5 +1,6 @@
 /.project
-/main/
-/view/
 /control/
 /entity/
+/main/
+/valueObject/
+/view/
