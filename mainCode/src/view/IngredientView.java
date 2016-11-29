@@ -32,6 +32,7 @@ public class IngredientView {
 			System.out.print("\n재료를 선택하세요(완료하였으면 0 입력): ");
 			int ingredientID = scanner.nextInt();
 			ingredientManager.setSelectlist(ingredientID);
+			
 		}
 	}
 	
