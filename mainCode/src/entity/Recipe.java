@@ -111,7 +111,6 @@ public class Recipe {
 
 	        }
 	    }
-	    System.out.println("го╬ъ!");
 	}
   
   
