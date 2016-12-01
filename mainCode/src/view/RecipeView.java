@@ -15,6 +15,8 @@ public class RecipeView {
     this.recipeManager = new RecipeManager();
     this.ingredientManager = new IngredientManager();
     this.selectList = ingredientManager.getSelectlist();
+    recipeManager.getLikelist();
+    recipeManager.sortLike();
   }
   
   public void search() { 

@@ -73,6 +73,7 @@ public class Recipe {
 	  recipelist.get(0).setLike(4); 
 	  recipelist.get(1).setLike(5);
 	  recipelist.get(2).setLike(1);
+	  recipelist.get(3).setLike(7);
 	  
 	  System.out.println("recipelist size print : " + recipelist.size());
 	  
@@ -88,34 +89,36 @@ public class Recipe {
   }
   
   public void sortLike(){
-	  System.out.println("print : " + likelist.get(0).getLike());
-	  //quickSort(likelist, 0, likelist.size() );
-	  bubbleSort(likelist);
-	  System.out.println("print : " + likelist.get(0).getLike());
+
+	  quickSort(likelist, 0, likelist.size()-1 );
+	  //bubbleSort(likelist);
+	  for(int x=0;x<likelist.size(); x++){
+	  System.out.println("print : " + likelist.get(x).getLike());
+	  }
 	  
   }
-  
+  /*
   void bubbleSort(Vector<RecipeInfo> likelist) {
 
 	    int n = likelist.size();
 	    Vector<RecipeInfo> temp = new Vector<RecipeInfo>();
 
-	    for (int i = 0; i < n; i++) {
+	    for (int i = 0; i < n-1; i++) {
 	        for (int j = 1; j < (n - i); j++) {
 
-	            if (likelist.get(j-1).getLike() > likelist.get(j).getLike()) {
+	            if (likelist.get(j-1).getLike() < likelist.get(j).getLike()) {
 	            	temp.add(0, likelist.get(j-1));
-	            	  likelist.add(j-1, likelist.get(j));
-	            	  likelist.add(j, temp.get(0));
+	            	likelist.set(j-1, likelist.get(j));
+	            	likelist.set(j, temp.get(0));
 	            }
 
 	        }
 	    }
 	}
   
+  */
   
   
-  /*
   int partition(Vector<RecipeInfo> likelist, int left, int right)
   {
         int i = left, j = right;
@@ -124,14 +127,14 @@ public class Recipe {
         int pivot = likelist.get(middle).getLike();
        
         while (i <= j) {
-              while (likelist.get(left).getLike() < pivot)
+              for (;likelist.get(i).getLike() > pivot;)
                     i++;
-              while (likelist.get(right).getLike() > pivot)
+              for (;likelist.get(j).getLike() < pivot;)
                     j--;
               if (i <= j) {
-            	  temp.add(0, likelist.get(left));
-            	  likelist.add(left, likelist.get(right));
-            	  likelist.add(right, temp.get(0));
+            	  temp.add(0, likelist.get(i));
+            	  likelist.set(i, likelist.get(j));
+            	  likelist.set(j, temp.get(0));
                     i++;
                     j--;
               }
@@ -148,7 +151,7 @@ public class Recipe {
               quickSort(likelist, index, right);
   }
   
-  */
+  
   
  
  }
