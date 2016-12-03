@@ -7,11 +7,12 @@ import view.*;
 //( 입력할때마다 과목 선택을 하기위해 txt 파일 덮어쓰기가 아닌 이어쓰기를 했습니다.)
 public class Main {
 	public static void main(String[] args) throws IOException {
-		Scanner scanner = new Scanner(System.in);
-		LoginView loginView = new LoginView();
-		boolean result = loginView.login();
-			
-		if(result){
+	  
+		  Scanner scanner = new Scanner(System.in);
+//		LoginView loginView = new LoginView();
+//		boolean result = loginView.login();
+		  
+		  InitPanel initPanel = new InitPanel();
 			TypeView typeView = new TypeView();
 			typeView.showTypeList();
 			typeView.getTypeID(scanner);
@@ -20,6 +21,5 @@ public class Main {
 			ingredientView.selectIngredient(scanner); // view->control->entity(valueObject형태로)
 			RecipeView recipeView = new RecipeView();
 			recipeView.search();
-		}
 	}
 }
