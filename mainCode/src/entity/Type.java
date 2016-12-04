@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
-import valueObject.TypeInfo;
+import valueObject.*;
 
 
 public class Type {
@@ -16,17 +16,23 @@ public class Type {
 		try {
 			BufferedWriter fileWriter = new BufferedWriter(new FileWriter("type.txt"));
 			fileWriter.write(1);
-			fileWriter.write("육류");
+			fileWriter.write("장류");
 			fileWriter.newLine();
 			fileWriter.write(2);
-			fileWriter.write("생선류");
+			fileWriter.write("고기류");
 			fileWriter.newLine();
 			fileWriter.write(3);
-			fileWriter.write("채소류");
+			fileWriter.write("해산물");
 			fileWriter.newLine();
 			fileWriter.write(4);
-			fileWriter.write("양념류");
+			fileWriter.write("채소류");
 			fileWriter.newLine();
+			fileWriter.write(5);
+			fileWriter.write("조미료");
+      fileWriter.newLine();
+      fileWriter.write(6);
+      fileWriter.write("나물류");
+      fileWriter.newLine();
 			
 			fileWriter.close();
 			
@@ -41,11 +47,19 @@ public class Type {
 			
 			BufferedReader fileReader = new BufferedReader(new FileReader("type.txt"));
 			typelist = new Vector<TypeInfo>();
-			
-			typelist.add(new TypeInfo(fileReader.read(), fileReader.readLine()));
-			typelist.add(new TypeInfo(fileReader.read(), fileReader.readLine()));
-			typelist.add(new TypeInfo(fileReader.read(), fileReader.readLine()));
-			typelist.add(new TypeInfo(fileReader.read(), fileReader.readLine()));
+			int num = 1;
+			String line;
+      for(int i = 0; num != -1; i++){
+        num = fileReader.read();
+        line = fileReader.readLine();
+        if(num != -1){
+          typelist.add(new TypeInfo(num, line));
+//          System.out.println(num);
+//          System.out.println(line);
+        }else {
+          break;
+        }
+      }
 			
 			fileReader.close();
 		} catch (IOException e) {

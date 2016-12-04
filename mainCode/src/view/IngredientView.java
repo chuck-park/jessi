@@ -2,6 +2,8 @@ package view;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.*;
+
 import control.*;
 import valueObject.*;
 
@@ -14,8 +16,8 @@ public class IngredientView {
 	public IngredientView(){
 		this.ingredientManager = new IngredientManager();
 		this.ingredientList = new Vector<IngredientInfo>();
-		this.selectList = new Vector<IngredientInfo>();
 		this.recipeManager = new RecipeManager();
+		this.selectList = new Vector<IngredientInfo>();
 	}
 
 	public void selectIngredient(Scanner scanner) throws IOException {
@@ -31,8 +33,6 @@ public class IngredientView {
 			}
 			System.out.print("\n재료를 선택하세요(완료하였으면 0 입력): ");
 			int ingredientID = scanner.nextInt();
-			ingredientManager.setSelectlist(ingredientID);
-			
 		}
 	}
 	
@@ -43,4 +43,13 @@ public class IngredientView {
 	public void clearSelectlist() throws IOException{
 	  ingredientManager.clearSelectlist();
 	}
+	
+	public void setSelectlist(JCheckBox checkBox){
+	  ingredientManager.setSelectlist(checkBox);
+	}
+	
+	public Vector<IngredientInfo> getList(){
+	  return this.ingredientManager.getList();
+	}
+	
 }

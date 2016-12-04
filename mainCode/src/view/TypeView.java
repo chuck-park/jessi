@@ -5,6 +5,7 @@ import java.util.*;
 import org.w3c.dom.*;
 
 import control.*;
+import valueObject.TypeInfo;
 
 public class TypeView {
 	private TypeManager typeManager;
@@ -39,5 +40,9 @@ public class TypeView {
 				System.out.print(", ");
 				System.out.println(typeList.get(i).getTypeName());
 			}		
+	}
+	
+	public Vector<TypeInfo> getList(){
+	  return typeManager.getList();
 	}
 }

@@ -8,18 +8,6 @@ import view.*;
 public class Main {
 	public static void main(String[] args) throws IOException {
 	  
-		  Scanner scanner = new Scanner(System.in);
-//		LoginView loginView = new LoginView();
-//		boolean result = loginView.login();
-		  
-		  InitPanel initPanel = new InitPanel();
-			TypeView typeView = new TypeView();
-			typeView.showTypeList();
-			typeView.getTypeID(scanner);
-			IngredientView ingredientView = new IngredientView();
-			ingredientView.clearSelectlist(); // 기존 selectlist.txt 초기화
-			ingredientView.selectIngredient(scanner); // view->control->entity(valueObject형태로)
-			RecipeView recipeView = new RecipeView();
-			recipeView.search();
+	  InitPanel initPanel = new InitPanel(); 
 	}
 }

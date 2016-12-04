@@ -11,8 +11,7 @@ public class TypeManager {
 	}
 	
 	public Vector<TypeInfo> getList() {
-		Vector<TypeInfo> typelist = type.getList();
-		return typelist;
+	  return type.getList();
 	}
 }
 

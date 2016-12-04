@@ -3,6 +3,8 @@ package entity;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.*;
+
 import valueObject.*;
 
 public class Ingredient {
@@ -90,19 +92,23 @@ public class Ingredient {
   }
 
   public Vector<IngredientInfo> getList() {
-    // TODO Auto-generated method stub
     try {
-
       BufferedReader fileReader = new BufferedReader(new FileReader("ingredient.txt"));
       ingredientlist = new Vector<IngredientInfo>();
-      // System.out.println(fileReader.read());
-
-      ingredientlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      ingredientlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      ingredientlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      ingredientlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      ingredientlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-
+      int num = 1;
+      String line;
+      for(int i = 0; num != -1; i++){
+        num = fileReader.read();
+        line = fileReader.readLine();
+        if(num != -1){
+          ingredientlist.add(new IngredientInfo(num, line));
+//          System.out.println(num);
+//          System.out.println(line);
+        }else {
+          break;
+        }
+      }
+      
       fileReader.close();
 
     } catch (IOException e) {
@@ -112,20 +118,13 @@ public class Ingredient {
     return ingredientlist;
   }
 
-  public void setSelectlist(int ingredientID) {
+  public void setSelectlist(JCheckBox checkBox) {
     try {    
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter("selectlist.txt", true));
-      for (int i = 0; i < ingredientlist.size(); i++) {
-        if(ingredientID != 0){
-          if (ingredientlist.get(i).getIngredientID() == ingredientID) {
-            fileWriter.write(ingredientlist.get(i).getIngredientID());
-            fileWriter.write(ingredientlist.get(i).getIngredientName());
-            fileWriter.newLine();
-          }
-        }else {
-          fileWriter.close();
-          return;
-        }
+      
+      if(checkBox.isSelected()){
+        fileWriter.write(checkBox.getText());
+        System.out.println(checkBox.getText() + "이(가) selectlist에 추가되었습니다.");
       }
       
       fileWriter.close();
