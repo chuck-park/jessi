@@ -13,8 +13,10 @@ public class Recipe {
   private Vector<String> ingredientlist2;
   private Vector<String> ingredientlist3;
   private Vector<String> ingredientlist4;
-  
-  public Recipe(){ // 생성시 레시피 별 재료리스트 추가
+
+  SearchRecipe hashmap;
+
+  public Recipe() {// 생성시 레시피 별 재료리스트 추가
     this.recipelist = new Vector<RecipeInfo>();
     this.ingredientlist1 = new Vector<String>();
     this.ingredientlist2 = new Vector<String>();
@@ -46,6 +48,14 @@ public class Recipe {
     recipelist.add(new RecipeInfo("낚지볶음", ingredientlist3));
     recipelist.add(new RecipeInfo("배추김치", ingredientlist4));
     
+  }
+
+  public void initialize(SearchRecipe hashmap){
+//    this.hashmap = hashmap;
+    hashmap.setRecipeNameInHashmap(1, "부대찌개");
+    hashmap.setRecipeNameInHashmap(2, "연근조림");
+    hashmap.setRecipeNameInHashmap(3, "낚지볶음");
+    hashmap.setRecipeNameInHashmap(4, "배추김치");
   }
   
   // selectlist와 recipelist의 재료 일치 비교 검색
@@ -150,7 +160,7 @@ public class Recipe {
         if (index < right)
               quickSort(likelist, index, right);
   }
-  
+
   
   
  

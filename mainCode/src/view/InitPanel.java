@@ -5,11 +5,20 @@ import java.io.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import control.*;
+import entity.*;
+import view.InitPanel.ButtonListener.*;
    
 @SuppressWarnings("serial")
 public class InitPanel extends JFrame{
-  
+
+  SearchRecipeManager serchRecipeManager = new SearchRecipeManager();
   Container con = getContentPane();
+  
+//  SearchRecipe hashmap = new SearchRecipe();
+//  Ingredient ingredient;
+//  Recipe recipe;
   
   JLabel titlelabel = new JLabel("JESSI:재료부터 시작하는 레시피");
   JPanel initPanel = new JPanel(); // 제일 큰거
@@ -26,9 +35,16 @@ public class InitPanel extends JFrame{
   JPanel selectPanel = new JPanel(); // 재료 정리
   
   JButton selectButton = new JButton("선택완료");
+  JButton accuracyButton  = new JButton("정확도순");
+  JButton alphButton = new JButton("가나다순");
+  JButton likeButton = new JButton("좋아요순");
+  JButton searchButton = new JButton("검색");
+  JTextField serchTextField = new JTextField(10);
+  
   String colName[] = {"순번", "레시피 이름", "정확도", "좋아요 수"};
   
   private ButtonListener buttonListener;
+  private SearchButtonListener searchButtonListener;
   
   public JCheckBox pig;
   public JCheckBox beef;
@@ -80,6 +96,7 @@ public class InitPanel extends JFrame{
     RecipeView recipeView = new RecipeView();
     
     buttonListener = new ButtonListener(ingredientView);
+    searchButtonListener = new SearchButtonListener();
     
     initPanel.setLayout(new BorderLayout());
     initPanel.setSize(1000,700);
@@ -190,17 +207,12 @@ public class InitPanel extends JFrame{
     leftPanel.setLayout(new BorderLayout());
     leftPanel.add(selectPanel, BorderLayout.CENTER);
     leftPanel.add(selectButton, BorderLayout.SOUTH);
-    selectButton.addActionListener(buttonListener);
     
     rightPanel.setLayout(new BorderLayout());
     sortButtonPanel.setLayout(new FlowLayout());
-    
-    
-    JButton accuracyButton  = new JButton("정확도순");
-    JButton alphButton = new JButton("가나다순");
-    JButton likeButton = new JButton("좋아요순");
-    JButton serchbutton = new JButton("검색");
-    JTextField serchTextField = new JTextField(10);
+
+    selectButton.addActionListener(buttonListener);
+    searchButton.addActionListener(searchButtonListener);
     
     rightPanel.add(sortButtonPanel, BorderLayout.NORTH);
     
@@ -208,20 +220,21 @@ public class InitPanel extends JFrame{
     sortButtonPanel.add(alphButton);
     sortButtonPanel.add(likeButton);
     sortButtonPanel.add(serchTextField);
-    sortButtonPanel.add(serchbutton);
+    sortButtonPanel.add(searchButton);
     
      JTable table;
      JScrollPane scroll; // 테이블 위에 열 라벨을 넣어주자~ scroll
      String[] [] data; // 3명의 정보를 담을 2차원 배열을 생성한다.
      String[] title = {"번호","레시피 이름","정확도 순","좋아요 순"}; //컬럼의 제목 정보를 표현할 1차원 배열
-
+     
       data = new String[35][4];
       
       table=new JTable(data,title); // table=new JTable(데이터-2차원배열, 컬럼배열);
       scroll = new JScrollPane(table);
       rightPanel.add(scroll);
 
-    con.add(initPanel); 
+      serchRecipeManager.setJTable(table);
+      con.add(initPanel); 
     
     setVisible(true);
     setSize(1000,700);
@@ -235,6 +248,7 @@ public class InitPanel extends JFrame{
     public ButtonListener(IngredientView ingredientView){
       this.ingredientView = ingredientView;
     }
+    
     @Override
     public void actionPerformed(ActionEvent e) {  
       ingredientView.setSelectlist(pig);
@@ -272,8 +286,19 @@ public class InitPanel extends JFrame{
       ingredientView.setSelectlist(GreenBeanSprouts);
       ingredientView.setSelectlist(bracken);
       ingredientView.setSelectlist(spinach);
-    }
-    
+    } 
+  }
+  public class SearchButtonListener implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      serchRecipeManager.initialize();
+//      recipe = new Recipe();
+//      recipe.initialize(hashmap);
+//      hashmap.getRecipeNameInHashmap(serchTextField.getText());
+      serchRecipeManager.getHashmap().getRecipeNameInHashmap(serchTextField.getText(),  serchRecipeManager.getJTable());
+   
+      }
   }
 }
 
