@@ -11,7 +11,7 @@ public class SearchRecipe {
       myMap.put(num, recipeName);
     }   
    
-   public void getRecipeNameInHashmap(String recipeName, JTable table){
+   public void getRecipeNameInHashmap(String recipeName, JTable table, JFrame frame){
       System.out.print("요리검색 ");
        if (myMap.containsValue(recipeName)){
           System.out.print("검색결과 "+recipeName+"가 존재합니다.");
@@ -22,6 +22,7 @@ public class SearchRecipe {
          System.out.println("검색결과 "+recipeName+"가 존재하지 않습니다.");
          table.setValueAt(" ", 0, 0);
          table.setValueAt(null, 0, 1);
+         JOptionPane.showMessageDialog(frame, "검색결과 "+recipeName+"가 존재하지 않습니다.");
        }
    }  
 }

@@ -12,7 +12,7 @@ import view.InitPanel.ButtonListener.*;
    
 @SuppressWarnings("serial")
 public class InitPanel extends JFrame{
-
+JFrame frame = this;
   SearchRecipeManager serchRecipeManager = new SearchRecipeManager();
   Container con = getContentPane();
   
@@ -296,7 +296,7 @@ public class InitPanel extends JFrame{
 //      recipe = new Recipe();
 //      recipe.initialize(hashmap);
 //      hashmap.getRecipeNameInHashmap(serchTextField.getText());
-      serchRecipeManager.getHashmap().getRecipeNameInHashmap(serchTextField.getText(),  serchRecipeManager.getJTable());
+      serchRecipeManager.getHashmap().getRecipeNameInHashmap(serchTextField.getText(),  serchRecipeManager.getJTable(),  frame );
    
       }
   }
