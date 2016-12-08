@@ -2,6 +2,8 @@ package control;
 
 import java.util.*;
 
+import javax.swing.*;
+
 import entity.*;
 import valueObject.*;
 
@@ -16,11 +18,11 @@ public class RecipeManager {
 	  return recipe.getLikelist();
   }
   
-  public void sortLike(){
-	  recipe.sortLike();
-  }
+  public Vector<RecipeInfo> sortLike(JTable table){
+    return recipe.sortLike(table);
+ }
   
-  public void search(Vector<IngredientInfo> selectlist){
-    recipe.search(selectlist);
+  public Vector<RecipeInfo> search(Vector<IngredientInfo> selectlist){
+   return recipe.search(selectlist);
   }
 }

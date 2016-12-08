@@ -29,7 +29,6 @@ public class SearchRecipeManager {
     this.table = table;
   }
   public JTable getJTable() {
-    // TODO Auto-generated method stub
     return this.table;
   }
   

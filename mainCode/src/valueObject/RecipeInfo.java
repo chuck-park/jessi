@@ -9,12 +9,12 @@ public class RecipeInfo {
   private int count;
   private int total; 
   
-  public RecipeInfo (String recipeName, Vector<String> ingredient){
+  public RecipeInfo (String recipeName, int total, Vector<String> ingredient){
     this.recipeName = recipeName;
     this.ingredient = ingredient;
+    this.total = total;
     this.like = 0;
     this.count = 0;
-    this.total = 0;
   }
 
   public String getRecipeName() {

@@ -19,25 +19,9 @@ public class IngredientView {
 		this.recipeManager = new RecipeManager();
 		this.selectList = new Vector<IngredientInfo>();
 	}
-
-	public void selectIngredient(Scanner scanner) throws IOException {
-		// TODO Auto-generated method stub
-		ingredientList = this.ingredientManager.getList();
-		for(int i=0;  i < ingredientList.size(); i++){
-			System.out.println("              ");
-			System.out.println("====재료선택창====");
-			for (int j=0; j < ingredientList.size(); j++){
-				System.out.print(ingredientList.get(j).getIngredientID());
-				System.out.print(", ");
-				System.out.println(ingredientList.get(j).getIngredientName());
-			}
-			System.out.print("\n재료를 선택하세요(완료하였으면 0 입력): ");
-			int ingredientID = scanner.nextInt();
-		}
-	}
 	
-	public void getSelectlist() throws IOException{
-	  ingredientManager.getSelectlist();
+	public Vector<IngredientInfo> getSelectlist() throws IOException{
+	  return ingredientManager.getSelectlist();
 	}
 	
 	public void clearSelectlist() throws IOException{

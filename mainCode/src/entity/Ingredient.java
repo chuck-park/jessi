@@ -14,75 +14,112 @@ public class Ingredient {
   public Ingredient() {
     try {
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter("ingredient.txt"));
-      BufferedReader fileReader = new BufferedReader(new FileReader("typeID.txt"));
-      int typeID = fileReader.read();
-      if (typeID == 1) {
-        fileWriter.write(1);
-        fileWriter.write("닭고기");
-        fileWriter.newLine();
-        fileWriter.write(2);
+
         fileWriter.write("돼지고기");
         fileWriter.newLine();
-        fileWriter.write(3);
+        
         fileWriter.write("소고기");
         fileWriter.newLine();
-        fileWriter.write(4);
-        fileWriter.write("양고기");
+        
+        fileWriter.write("닭고기");
         fileWriter.newLine();
-        fileWriter.write(5);
-        fileWriter.write("오리고기");
+        
+        fileWriter.write("고추장");
         fileWriter.newLine();
-      } else if (typeID == 2) {
-        fileWriter.write(1);
-        fileWriter.write("생선1");
+        
+        fileWriter.write("간장");
         fileWriter.newLine();
-        fileWriter.write(2);
-        fileWriter.write("생선2");
+        
+        fileWriter.write("된장");
         fileWriter.newLine();
-        fileWriter.write(3);
-        fileWriter.write("생선3");
+        
+        fileWriter.write("가지");
         fileWriter.newLine();
-        fileWriter.write(4);
-        fileWriter.write("생선4");
+        
+        fileWriter.write("버섯");
         fileWriter.newLine();
-        fileWriter.write(5);
-        fileWriter.write("생선5");
+        
+        fileWriter.write("당근");
         fileWriter.newLine();
-      } else if (typeID == 3) {
-        fileWriter.write(1);
-        fileWriter.write("채소1");
-        fileWriter.newLine();
-        fileWriter.write(2);
-        fileWriter.write("채소2");
-        fileWriter.newLine();
-        fileWriter.write(3);
-        fileWriter.write("채소3");
-        fileWriter.newLine();
-        fileWriter.write(4);
-        fileWriter.write("채소4");
-        fileWriter.newLine();
-        fileWriter.write(5);
-        fileWriter.write("채소5");
-        fileWriter.newLine();
-      } else if (typeID == 4) {
-        fileWriter.write(1);
-        fileWriter.write("양념1");
-        fileWriter.newLine();
-        fileWriter.write(2);
-        fileWriter.write("양념2");
-        fileWriter.newLine();
-        fileWriter.write(3);
-        fileWriter.write("양념3");
-        fileWriter.newLine();
-        fileWriter.write(4);
-        fileWriter.write("양념4");
-        fileWriter.newLine();
-        fileWriter.write(5);
-        fileWriter.write("양념5");
-        fileWriter.newLine();
-      }
 
-      fileReader.close();
+        fileWriter.write("호박");
+        fileWriter.newLine();
+
+        fileWriter.write("파프리카");
+        fileWriter.newLine();
+        
+        fileWriter.write("마늘");
+        fileWriter.newLine();
+        
+        fileWriter.write("양파");
+        fileWriter.newLine();
+
+        fileWriter.write("고추");
+        fileWriter.newLine();
+
+        fileWriter.write("생강");
+        fileWriter.newLine();
+
+        fileWriter.write("파");
+        fileWriter.newLine();
+
+        fileWriter.write("고등어");
+        fileWriter.newLine();
+
+        fileWriter.write("미역");
+        fileWriter.newLine();
+
+        fileWriter.write("홍합");
+        fileWriter.newLine();
+
+        fileWriter.write("바지락");
+        fileWriter.newLine();
+
+        fileWriter.write("오징어");
+        fileWriter.newLine();
+
+        fileWriter.write("새우");
+        fileWriter.newLine();
+        
+        fileWriter.write("꽃게");
+        fileWriter.newLine();
+
+        fileWriter.write("갈치");
+        fileWriter.newLine();
+
+        fileWriter.write("설탕");
+        fileWriter.newLine();
+
+        fileWriter.write("소금");
+        fileWriter.newLine();
+
+        fileWriter.write("후추");
+        fileWriter.newLine();
+
+        fileWriter.write("고춧가루");
+        fileWriter.newLine();
+
+        fileWriter.write("물엿");
+        fileWriter.newLine();
+
+        fileWriter.write("식초");
+        fileWriter.newLine();
+
+        fileWriter.write("굴소스");
+        fileWriter.newLine();
+
+        fileWriter.write("콩나물");
+        fileWriter.newLine();
+
+        fileWriter.write("숙주나물");
+        fileWriter.newLine();
+
+        fileWriter.write("고사리");
+        fileWriter.newLine();
+
+        fileWriter.write("시금치");
+        fileWriter.newLine();
+        
       fileWriter.close();
 
     } catch (IOException e) {
@@ -95,15 +132,12 @@ public class Ingredient {
     try {
       BufferedReader fileReader = new BufferedReader(new FileReader("ingredient.txt"));
       ingredientlist = new Vector<IngredientInfo>();
-      int num = 1;
-      String line;
-      for(int i = 0; num != -1; i++){
-        num = fileReader.read();
+      String line = "start";
+      for(int i = 0; line != null; i++){
         line = fileReader.readLine();
-        if(num != -1){
-          ingredientlist.add(new IngredientInfo(num, line));
-//          System.out.println(num);
-//          System.out.println(line);
+        if(line != null){
+          ingredientlist.add(new IngredientInfo(line));
+          //System.out.println(line);
         }else {
           break;
         }
@@ -124,7 +158,8 @@ public class Ingredient {
       
       if(checkBox.isSelected()){
         fileWriter.write(checkBox.getText());
-        System.out.println(checkBox.getText() + "이(가) selectlist에 추가되었습니다.");
+        fileWriter.newLine();
+        //System.out.println(checkBox.getText() + "이(가) selectlist에 추가되었습니다."); // test
       }
       
       fileWriter.close();
@@ -139,17 +174,23 @@ public class Ingredient {
     Vector<IngredientInfo> selectlist = new Vector<IngredientInfo>();
     try {
       BufferedReader fileReader = new BufferedReader(new FileReader("selectlist.txt"));
-      selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-      selectlist.add(new IngredientInfo(fileReader.read(), fileReader.readLine()));
-
+      String line = "start";
+      for(int i = 0; line != null; i++){
+        line = fileReader.readLine();
+        if(line != null){
+          selectlist.add(new IngredientInfo(line));
+          //System.out.println(line); // 가져오는 재료목록 출력 테스트
+        }else {
+          break;
+        }
+      }
+      
       fileReader.close();
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    
     return selectlist;
   }
   

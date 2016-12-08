@@ -1,14 +1,15 @@
 package entity;
 
-import java.io.*;
-
 import java.util.*;
+
+import javax.swing.*;
 
 import valueObject.*;
 
 public class Recipe {
   private Vector<RecipeInfo> recipelist;
   private Vector<RecipeInfo> likelist;
+  private Vector<RecipeInfo> resultlist;
   private Vector<String> ingredientlist1;
   private Vector<String> ingredientlist2;
   private Vector<String> ingredientlist3;
@@ -18,6 +19,7 @@ public class Recipe {
 
   public Recipe() {// 생성시 레시피 별 재료리스트 추가
     this.recipelist = new Vector<RecipeInfo>();
+    this.resultlist = new Vector<RecipeInfo>();
     this.ingredientlist1 = new Vector<String>();
     this.ingredientlist2 = new Vector<String>();
     this.ingredientlist3 = new Vector<String>();
@@ -29,7 +31,7 @@ public class Recipe {
     ingredientlist1.add("양파");
     ingredientlist1.add("고추장");
     
-    ingredientlist2.add("닭고기");
+    ingredientlist2.add("연근");
     ingredientlist2.add("간장");
     ingredientlist2.add("식초");
     ingredientlist2.add("물엿");
@@ -43,10 +45,10 @@ public class Recipe {
     ingredientlist4.add("고추가루");
     ingredientlist4.add("소금");
     
-    recipelist.add(new RecipeInfo("부대찌개", ingredientlist1));
-    recipelist.add(new RecipeInfo("연근조림", ingredientlist2));
-    recipelist.add(new RecipeInfo("낚지볶음", ingredientlist3));
-    recipelist.add(new RecipeInfo("배추김치", ingredientlist4));
+    recipelist.add(new RecipeInfo("부대찌개", 5, ingredientlist1));
+    recipelist.add(new RecipeInfo("연근조림", 4, ingredientlist2));
+    recipelist.add(new RecipeInfo("낚지볶음", 4, ingredientlist3));
+    recipelist.add(new RecipeInfo("배추김치", 3, ingredientlist4));
     
   }
 
@@ -58,24 +60,35 @@ public class Recipe {
     hashmap.setRecipeNameInHashmap(4, "배추김치");
   }
   
-  // selectlist와 recipelist의 재료 일치 비교 검색
-  public void search(Vector<IngredientInfo> selectlist){
+  // selectlist와 recipelist의 재료 일치를 비교하고 새로운 배열을 만들어 리턴.
+  public Vector<RecipeInfo> search(Vector<IngredientInfo> selectlist){
+    for(int i = 0; i < recipelist.size(); i++){ // 이전에 검색된 카운트 초기화
+      recipelist.get(i).setCount(0);
+    }
+    
     int k = 0;
+    Vector<RecipeInfo> templist = new Vector<RecipeInfo>();
+    System.out.println("선택하신 재료 수는 : " + selectlist.size());
+    System.out.println("전체 레시피DB 갯수는 : " + recipelist.size());
     for(int i = 0; i < selectlist.size(); i++){
       for(int j = 0; j < recipelist.size(); j++){
         for(k = 0; k < recipelist.get(j).getIngredient().size(); k++){
-          //System.out.println(recipelist.get(j).getIngredient().size());
-          System.out.println(selectlist.get(i).getIngredientName() + " ==? " + recipelist.get(j).getIngredient().get(k));
+          //System.out.println(recipelist.get(j).getIngredient().size());          
           if(selectlist.get(i).getIngredientName().equals(recipelist.get(j).getIngredient().get(k))){
-            System.out.println("ok");
-            recipelist.get(j).countUp(); // 일치하면 해당 recipe의 count++
+            if(recipelist.get(j).getCount() == 0){ // 일치하고 아직 선택된적이 없으면 해당 recipe를 templist에 추가
+              templist.add((recipelist.get(j))); 
+              System.out.println("일치 레시피 명 : " + recipelist.get(j).getRecipeName() + ",  일치 재료 명" + " : " + recipelist.get(j).getIngredient().get(k));
+            }
+            recipelist.get(j).countUp(); // 해당 recipe의 count++
           }
         }
         k = 0;
       }
     }
-    for(int a = 0; a < recipelist.size(); a++)
-    System.out.println(a + "번째 레시피의 count : " + recipelist.get(a).getCount());
+//    for(int a = 0; a < recipelist.size(); a++){ // test
+//      System.out.println(a + "번째 레시피의 count : " + recipelist.get(a).getCount());
+//    }
+    return resultlist = templist; // 최종 resultlist를 새로 만들어진 templist로 교체
   }
   
   public int getLikelist(){ // 좋아요가 1이상인 list에 레시피인포 생성
@@ -89,7 +102,7 @@ public class Recipe {
 	  
 	  this.likelist = new Vector <RecipeInfo>(); 
 	  
-	  for(int x=0; x<recipelist.size();x++){
+	  for(int x = 0; x < recipelist.size(); x++){
 		  if(recipelist.get(x).getLike()!=0){ // list에 좋아요가 0이 아닌 리스트를 넣는다
 			  likelist.add(recipelist.get(x));
 			  System.out.println("likelist "+ x + " print : " + likelist.size());
@@ -98,15 +111,12 @@ public class Recipe {
 	  return likelist.size(); // 생성된 리스트의 컴포넌트 수를 반환
   }
   
-  public void sortLike(){
+  public Vector<RecipeInfo> sortLike(JTable table){
+    getLikelist(); // 테스트용
+    quickSort(likelist, 0, likelist.size()-1 );
+    return likelist;
 
-	  quickSort(likelist, 0, likelist.size()-1 );
-	  //bubbleSort(likelist);
-	  for(int x=0;x<likelist.size(); x++){
-	  System.out.println("print : " + likelist.get(x).getLike());
-	  }
-	  
-  }
+ }
   /*
   void bubbleSort(Vector<RecipeInfo> likelist) {
 
