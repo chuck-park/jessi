@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class SearchRecipe {
    HashMap<Integer, String> myMap = new HashMap<Integer, String>();
@@ -12,17 +13,17 @@ public class SearchRecipe {
     }   
    
    public void getRecipeNameInHashmap(String recipeName, JTable table, JFrame frame){
-      System.out.print("¿ä¸®°Ë»ö ");
        if (myMap.containsValue(recipeName)){
-          System.out.print("°Ë»ö°á°ú "+recipeName+"°¡ Á¸ÀçÇÕ´Ï´Ù.");
+    	  for(int h = 0; h<table.getColumnCount();h++){
+	    	  for(int i = 0; i<table.getRowCount();i++){
+	    		  table.setValueAt(" ", i, h);
+	    	  }
+    	  }
           table.setValueAt("1", 0, 0);
           table.setValueAt(recipeName, 0, 1);
-          
+          table.setValueAt("100%", 0, 2);
        }else  {
-         System.out.println("°Ë»ö°á°ú "+recipeName+"°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
-         table.setValueAt(" ", 0, 0);
-         table.setValueAt(null, 0, 1);
-         JOptionPane.showMessageDialog(frame, "°Ë»ö°á°ú "+recipeName+"°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+         JOptionPane.showMessageDialog(frame, "ìš”ë¦¬ëª… "+recipeName+"ì´(ê°€) ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
        }
    }  
 }
