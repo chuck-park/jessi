@@ -39,13 +39,11 @@ public class RecipeView {
   public void clearTableData(JTable table) {
     int j = 0;
 
-    for (int i = 0; i < 35; i++) {
-      // System.out.println("i : " + i); System.out.println("j : " + j); // test
-      table.setValueAt("", i, j); // Integer.toString(i) ==
-                                                       // String.valueOf(i)
-      table.setValueAt("", i, j + 1); // 레시피 이름
-      table.setValueAt("", i, j + 2); // 재료일치비율
-      table.setValueAt("", i, j + 3); // 좋아요
+    for (int i = 0; i < 35; i++) { // 전체 컬럼을 ""로 초기화
+      table.setValueAt("", i, j);
+      table.setValueAt("", i, j + 1);
+      table.setValueAt("", i, j + 2); 
+      table.setValueAt("", i, j + 3);
 
     }
   }
@@ -54,11 +52,15 @@ public class RecipeView {
     return recipeManager.search(selectlist);
   }
 
-  public void getLikelist() {
-    recipeManager.getLikelist();
-  }
+//  public void getLikelist() {
+//    recipeManager.getLikelist();
+//  }
 
-  public Vector<RecipeInfo> sortLike(JTable table) {
-    return recipeManager.sortLike(table);
+  public Vector<RecipeInfo> likeSort(Vector<RecipeInfo> resultlist) {
+    return recipeManager.likeSort(resultlist);
   }
+  
+  public Vector<RecipeInfo> nameSort(Vector<RecipeInfo> resultlist){
+    return recipeManager.nameSort(resultlist);
+ }
 }

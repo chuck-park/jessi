@@ -35,9 +35,9 @@ public class InitPanel extends JFrame {
   JPanel selectPanel = new JPanel(); // 재료 정리
 
   JButton selectButton = new JButton("선택완료");
-  JButton accuracyButton = new JButton("정확도순");
-  JButton alphButton = new JButton("가나다순");
-  JButton likeButton = new JButton("좋아요순");
+  JButton accuracySortButton = new JButton("정확도순");
+  JButton nameSortButton = new JButton("가나다순");
+  JButton likeSortButton = new JButton("좋아요순");
   JButton searchButton = new JButton("검색");
   JTextField serchTextField = new JTextField(10);
 
@@ -46,6 +46,8 @@ public class InitPanel extends JFrame {
 
   private SelectButtonListener selectButtonListener;
   private SearchButtonListener searchButtonListener;
+  private NameSortButtonListener nameSortButtonListener;
+  private LikeSortButtonListener likeSortButtonListener;
 
   public JCheckBox pig;
   public JCheckBox beef;
@@ -96,6 +98,8 @@ public class InitPanel extends JFrame {
     ingredientView.clearSelectlist(); // 기존 selectlist.txt 초기화
     RecipeView recipeView = new RecipeView();
     selectButtonListener = new SelectButtonListener(ingredientView, recipeView);
+    nameSortButtonListener = new NameSortButtonListener(recipeView);
+    likeSortButtonListener = new LikeSortButtonListener(recipeView);
     searchButtonListener = new SearchButtonListener();
 
     initPanel.setLayout(new BorderLayout());
@@ -212,22 +216,25 @@ public class InitPanel extends JFrame {
 
     leftPanel.setLayout(new BorderLayout());
     leftPanel.add(selectPanel, BorderLayout.CENTER);
-    leftPanel.add(selectButton, BorderLayout.SOUTH);
+    leftPanel.add(selectButton, BorderLayout.SOUTH); // 선택완료 버튼
 
     rightPanel.setLayout(new BorderLayout());
     sortButtonPanel.setLayout(new FlowLayout());
-
-    selectButton.addActionListener(selectButtonListener); // 선택완료 버튼에 리스너 추가
+    
+    // 각 버튼에 리스너 붙이기
+    selectButton.addActionListener(selectButtonListener); 
     searchButton.addActionListener(searchButtonListener);
-    accuracyButton.addActionListener(selectButtonListener);
+    accuracySortButton.addActionListener(selectButtonListener);
+    nameSortButton.addActionListener(nameSortButtonListener);
+    likeSortButton.addActionListener(likeSortButtonListener);
 
     rightPanel.add(sortButtonPanel, BorderLayout.NORTH);
 
-    sortButtonPanel.add(accuracyButton);
-    sortButtonPanel.add(alphButton);
-    sortButtonPanel.add(likeButton);
-    sortButtonPanel.add(serchTextField);
-    sortButtonPanel.add(searchButton);
+    sortButtonPanel.add(accuracySortButton); // 정확도순 정렬 버튼
+    sortButtonPanel.add(nameSortButton); // 이름순 정렬 버튼
+    sortButtonPanel.add(likeSortButton); // 좋아요순 정렬 버튼
+    sortButtonPanel.add(serchTextField); // 검색 필드
+    sortButtonPanel.add(searchButton); // 검색하기 버튼
 
     // 테이블 생성
     JScrollPane scroll; // 테이블 위에 열 라벨을 넣어주자~ scroll
@@ -332,26 +339,41 @@ public class InitPanel extends JFrame {
       table = searchRecipeManager.getJTable();
       recipeView.clearTableData(table);
       recipeView.showTableData(resultlist, table); // 선택한 재료로 레시피를 검색하고 결과 리스트를
-                                                   // 출력한다.
+                                                     // 출력한다.
       // resultlist.elementAt(3).getRecipeName() // test
     }
   }
-
-  // sort with a number of likes
-  public class likeButtonListener implements ActionListener {
+  
+  public class NameSortButtonListener implements ActionListener {
     RecipeView recipeView;
-    JTable table;
-    Vector<RecipeInfo> resultlist;
-
-    public likeButtonListener(RecipeView recipeView, JTable table) {
+    
+    public NameSortButtonListener(RecipeView recipeView) {
       this.recipeView = recipeView;
-      this.table = table;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      table = searchRecipeManager.getJTable();
+      resultlist = recipeView.nameSort(resultlist);
+      recipeView.clearTableData(table);
+      recipeView.showTableData(resultlist, table);
+    }
+    
+  }
+  
+  // sort with a number of likes
+  public class LikeSortButtonListener implements ActionListener {
+    RecipeView recipeView;
+
+    public LikeSortButtonListener(RecipeView recipeView) {
+      this.recipeView = recipeView;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      resultlist = recipeView.sortLike(table);
-      // recipeView.showTableData(resultlist);
+      table = searchRecipeManager.getJTable();
+      resultlist = recipeView.likeSort(resultlist);
+      recipeView.clearTableData(table);
+      recipeView.showTableData(resultlist, table);
     }
 
   }

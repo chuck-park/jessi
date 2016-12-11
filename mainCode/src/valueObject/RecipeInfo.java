@@ -6,7 +6,7 @@ public class RecipeInfo {
   private String recipeName;
   private String recipe;
   private Vector<String> ingredient;
-  private int like; // ��õ�� ������ ���� like ����
+  private int like; 
   private int count;
   private int total; 
   
@@ -15,6 +15,15 @@ public class RecipeInfo {
     this.ingredient = ingredient;
     this.total = total;
     this.like = 0;
+    this.count = 0;
+    this.recipe = recipe;
+  }
+  
+  public RecipeInfo (String recipeName, int total, Vector<String> ingredient, String recipe, int like){
+    this.recipeName = recipeName;
+    this.ingredient = ingredient;
+    this.total = total;
+    this.like = like;
     this.count = 0;
     this.recipe = recipe;
   }
