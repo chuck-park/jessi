@@ -9,42 +9,42 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import control.*;
+import entity.Recipe;
 import valueObject.*;
 
 @SuppressWarnings("serial")
 public class InitPanel extends JFrame {
+
+  Vector<RecipeInfo> resultlist;
   JFrame frame = this;
-  SearchRecipeManager serchRecipeManager = new SearchRecipeManager();
+  SearchRecipeManager searchRecipeManager = new SearchRecipeManager();
   Container con = getContentPane();
 
-  // SearchRecipe hashmap = new SearchRecipe();
-  // Ingredient ingredient;
-  // Recipe recipe;
+  JLabel titlelabel = new JLabel("JESSI:ì¬ë£Œë¶€í„° ì‹œì‘í•˜ëŠ” ë ˆì‹œí”¼");
+  JPanel initPanel = new JPanel(); // ì œì¼ í°ê±°
+  JPanel mainPanel = new JPanel(); // ì™¼ìª½
+  JPanel rightPanel = new JPanel(); // ì˜¤ë¥¸ìª½
+  JPanel pastePanel = new JPanel(); // ì¥ë¥˜
+  JPanel meatPanel = new JPanel(); // ê³ ê¸°ë¥˜
+  JPanel seafoodPanel = new JPanel(); // í•´ì‚°ë¬¼
+  JPanel vagetablePanel = new JPanel(); // ì±„ì†Œë¥˜
+  JPanel sortButtonPanel = new JPanel(); // ì˜¤ë¥¸ìª½ ìœ„ì˜ ë²„íŠ¼ë“¤
+  JPanel saucePanel = new JPanel(); // ì¡°ë¯¸ë£Œ
+  JPanel herbPanel = new JPanel(); // ë‚˜ë¬¼ë¥˜
+  JPanel leftPanel = new JPanel(); // ì™¼ìª½ + ì„ íƒì™„ë£Œ
+  JPanel selectPanel = new JPanel(); // ì¬ë£Œ ì •ë¦¬
 
-  JLabel titlelabel = new JLabel("JESSI:Àç·áºÎÅÍ ½ÃÀÛÇÏ´Â ·¹½ÃÇÇ");
-  JPanel initPanel = new JPanel(); // Á¦ÀÏ Å«°Å
-  JPanel mainPanel = new JPanel(); // ¿ŞÂÊ
-  JPanel rightPanel = new JPanel(); // ¿À¸¥ÂÊ
-  JPanel pastePanel = new JPanel(); // Àå·ù
-  JPanel meatPanel = new JPanel(); // °í±â·ù
-  JPanel seafoodPanel = new JPanel(); // ÇØ»ê¹°
-  JPanel vagetablePanel = new JPanel(); // Ã¤¼Ò·ù
-  JPanel sortButtonPanel = new JPanel(); // ¿À¸¥ÂÊ À§ÀÇ ¹öÆ°µé
-  JPanel saucePanel = new JPanel(); // Á¶¹Ì·á
-  JPanel herbPanel = new JPanel(); // ³ª¹°·ù
-  JPanel leftPanel = new JPanel(); // ¿ŞÂÊ + ¼±ÅÃ¿Ï·á
-  JPanel selectPanel = new JPanel(); // Àç·á Á¤¸®
-
-  JButton selectButton = new JButton("¼±ÅÃ¿Ï·á");
-  JButton accuracyButton = new JButton("Á¤È®µµ¼ø");
-  JButton alphButton = new JButton("°¡³ª´Ù¼ø");
-  JButton likeButton = new JButton("ÁÁ¾Æ¿ä¼ø");
-  JButton searchButton = new JButton("°Ë»ö");
+  JButton selectButton = new JButton("ì„ íƒì™„ë£Œ");
+  JButton accuracyButton = new JButton("ì •í™•ë„ìˆœ");
+  JButton alphButton = new JButton("ê°€ë‚˜ë‹¤ìˆœ");
+  JButton likeButton = new JButton("ì¢‹ì•„ìš”ìˆœ");
+  JButton searchButton = new JButton("ê²€ìƒ‰");
   JTextField serchTextField = new JTextField(10);
 
-  String colName[] = { "¼ø¹ø", "·¹½ÃÇÇ ÀÌ¸§", "Á¤È®µµ", "ÁÁ¾Æ¿ä ¼ö" };
+  JTable table;
+  String colName[] = { "ìˆœë²ˆ", "ë ˆì‹œí”¼ ì´ë¦„", "ì •í™•ë„", "ì¢‹ì•„ìš” ìˆ˜" };
 
-  private OkButtonListener okButtonListener;
+  private SelectButtonListener selectButtonListener;
   private SearchButtonListener searchButtonListener;
 
   public JCheckBox pig;
@@ -93,10 +93,9 @@ public class InitPanel extends JFrame {
     typeView.getList();
     IngredientView ingredientView = new IngredientView();
     ingredientView.getList();
-    ingredientView.clearSelectlist(); // ±âÁ¸ selectlist.txt ÃÊ±âÈ­
+    ingredientView.clearSelectlist(); // ê¸°ì¡´ selectlist.txt ì´ˆê¸°í™”
     RecipeView recipeView = new RecipeView();
-
-    okButtonListener = new OkButtonListener(ingredientView, recipeView);
+    selectButtonListener = new SelectButtonListener(ingredientView, recipeView);
     searchButtonListener = new SearchButtonListener();
 
     initPanel.setLayout(new BorderLayout());
@@ -109,38 +108,38 @@ public class InitPanel extends JFrame {
     mainPanel.add(leftPanel);
     mainPanel.add(rightPanel);
 
-    meatPanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "À°·ù", TitledBorder.LEADING,
+    meatPanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "ìœ¡ë¥˜", TitledBorder.LEADING,
         TitledBorder.TOP, null, new Color(0, 0, 0)));
-    this.pig = new JCheckBox("µÅÁö°í±â");
-    this.beef = new JCheckBox("¼Ò°í±â");
-    this.chicken = new JCheckBox("´ß°í±â");
+    this.pig = new JCheckBox("ë¼ì§€ê³ ê¸°");
+    this.beef = new JCheckBox("ì†Œê³ ê¸°");
+    this.chicken = new JCheckBox("ë‹­ê³ ê¸°");
 
     meatPanel.add(pig);
     meatPanel.add(beef);
     meatPanel.add(chicken);
 
-    pastePanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "Àå·ù", TitledBorder.LEADING,
+    pastePanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "ì¥ë¥˜", TitledBorder.LEADING,
         TitledBorder.TOP, null, new Color(0, 0, 0)));
-    this.gochujang = new JCheckBox("°íÃßÀå");
-    this.soysauce = new JCheckBox("°£Àå");
-    this.doenjang = new JCheckBox("µÈÀå");
+    this.gochujang = new JCheckBox("ê³ ì¶”ì¥");
+    this.soysauce = new JCheckBox("ê°„ì¥");
+    this.doenjang = new JCheckBox("ëœì¥");
 
     pastePanel.add(gochujang);
     pastePanel.add(soysauce);
     pastePanel.add(doenjang);
 
-    vagetablePanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "Ã¤¼Ò·ù", TitledBorder.LEADING,
+    vagetablePanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "ì±„ì†Œë¥˜", TitledBorder.LEADING,
         TitledBorder.TOP, null, new Color(0, 0, 0)));
-    this.eggplant = new JCheckBox("°¡Áö");
-    this.mushroom = new JCheckBox("¹ö¼¸");
-    this.carrot = new JCheckBox("´ç±Ù");
-    this.pumpkin = new JCheckBox("È£¹Ú");
-    this.paprika = new JCheckBox("ÆÄÇÁ¸®Ä«");
-    this.garlic = new JCheckBox("¸¶´Ã");
-    this.onion = new JCheckBox("¾çÆÄ");
-    this.lotusRoot = new JCheckBox("¿¬±Ù");
-    this.ginger = new JCheckBox("»ı°­");
-    this.scallion = new JCheckBox("ÆÄ");
+    this.eggplant = new JCheckBox("ê°€ì§€");
+    this.mushroom = new JCheckBox("ë²„ì„¯");
+    this.carrot = new JCheckBox("ë‹¹ê·¼");
+    this.pumpkin = new JCheckBox("í˜¸ë°•");
+    this.paprika = new JCheckBox("íŒŒí”„ë¦¬ì¹´");
+    this.garlic = new JCheckBox("ë§ˆëŠ˜");
+    this.onion = new JCheckBox("ì–‘íŒŒ");
+    this.lotusRoot = new JCheckBox("ì—°ê·¼");
+    this.ginger = new JCheckBox("ìƒê°•");
+    this.scallion = new JCheckBox("íŒŒ");
 
     vagetablePanel.add(eggplant);
     vagetablePanel.add(mushroom);
@@ -153,16 +152,16 @@ public class InitPanel extends JFrame {
     vagetablePanel.add(ginger);
     vagetablePanel.add(scallion);
 
-    seafoodPanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "ÇØ»ê¹°", TitledBorder.LEADING,
+    seafoodPanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "í•´ì‚°ë¬¼", TitledBorder.LEADING,
         TitledBorder.TOP, null, new Color(0, 0, 0)));
-    this.ChubMackerel = new JCheckBox("°íµî¾î");
-    this.seaweed = new JCheckBox("¹Ì¿ª");
-    this.mussel = new JCheckBox("È«ÇÕ");
-    this.ManilaClam = new JCheckBox("¹ÙÁö¶ô");
-    this.squid = new JCheckBox("¿ÀÂ¡¾î");
-    this.shrimp = new JCheckBox("»õ¿ì");
-    this.crab = new JCheckBox("²É°Ô");
-    this.hairtail = new JCheckBox("°¥Ä¡");
+    this.ChubMackerel = new JCheckBox("ê³ ë“±ì–´");
+    this.seaweed = new JCheckBox("ë¯¸ì—­");
+    this.mussel = new JCheckBox("í™í•©");
+    this.ManilaClam = new JCheckBox("ë°”ì§€ë½");
+    this.squid = new JCheckBox("ì˜¤ì§•ì–´");
+    this.shrimp = new JCheckBox("ìƒˆìš°");
+    this.crab = new JCheckBox("ê½ƒê²Œ");
+    this.hairtail = new JCheckBox("ê°ˆì¹˜");
 
     seafoodPanel.add(ChubMackerel);
     seafoodPanel.add(seaweed);
@@ -173,15 +172,15 @@ public class InitPanel extends JFrame {
     seafoodPanel.add(crab);
     seafoodPanel.add(hairtail);
 
-    saucePanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "Á¶¹Ì·á", TitledBorder.LEADING,
+    saucePanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "ì¡°ë¯¸ë£Œ", TitledBorder.LEADING,
         TitledBorder.TOP, null, new Color(0, 0, 0)));
-    this.sugar = new JCheckBox("¼³ÅÁ");
-    this.salt = new JCheckBox("¼Ò±İ");
-    this.pepper = new JCheckBox("ÈÄÃß");
-    this.ChiliPowder = new JCheckBox("°íÃå°¡·ç");
-    this.StarchSyrup = new JCheckBox("¹°¿³");
-    this.vinegar = new JCheckBox("½ÄÃÊ");
-    this.OysterSauce = new JCheckBox("±¼¼Ò½º");
+    this.sugar = new JCheckBox("ì„¤íƒ•");
+    this.salt = new JCheckBox("ì†Œê¸ˆ");
+    this.pepper = new JCheckBox("í›„ì¶”");
+    this.ChiliPowder = new JCheckBox("ê³ ì¶§ê°€ë£¨");
+    this.StarchSyrup = new JCheckBox("ë¬¼ì—¿");
+    this.vinegar = new JCheckBox("ì‹ì´ˆ");
+    this.OysterSauce = new JCheckBox("êµ´ì†ŒìŠ¤");
 
     saucePanel.add(sugar);
     saucePanel.add(salt);
@@ -191,12 +190,12 @@ public class InitPanel extends JFrame {
     saucePanel.add(vinegar);
     saucePanel.add(OysterSauce);
 
-    herbPanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "³ª¹°·ù", TitledBorder.LEADING,
+    herbPanel.setBorder(new TitledBorder(UIManager.getBorder("TitleBorder.border"), "ë‚˜ë¬¼ë¥˜", TitledBorder.LEADING,
         TitledBorder.TOP, null, new Color(0, 0, 0)));
-    this.BeanSprouts = new JCheckBox("Äá³ª¹°");
-    this.GreenBeanSprouts = new JCheckBox("¼÷ÁÖ³ª¹°");
-    this.bracken = new JCheckBox("°í»ç¸®");
-    this.spinach = new JCheckBox("½Ã±İÄ¡");
+    this.BeanSprouts = new JCheckBox("ì½©ë‚˜ë¬¼");
+    this.GreenBeanSprouts = new JCheckBox("ìˆ™ì£¼ë‚˜ë¬¼");
+    this.bracken = new JCheckBox("ê³ ì‚¬ë¦¬");
+    this.spinach = new JCheckBox("ì‹œê¸ˆì¹˜");
 
     herbPanel.add(BeanSprouts);
     herbPanel.add(GreenBeanSprouts);
@@ -218,8 +217,9 @@ public class InitPanel extends JFrame {
     rightPanel.setLayout(new BorderLayout());
     sortButtonPanel.setLayout(new FlowLayout());
 
-    selectButton.addActionListener(okButtonListener);
+    selectButton.addActionListener(selectButtonListener); // ì„ íƒì™„ë£Œ ë²„íŠ¼ì— ë¦¬ìŠ¤ë„ˆ ì¶”ê°€
     searchButton.addActionListener(searchButtonListener);
+    accuracyButton.addActionListener(selectButtonListener);
 
     rightPanel.add(sortButtonPanel, BorderLayout.NORTH);
 
@@ -229,45 +229,64 @@ public class InitPanel extends JFrame {
     sortButtonPanel.add(serchTextField);
     sortButtonPanel.add(searchButton);
 
-    JTable table;
-    JScrollPane scroll; // Å×ÀÌºí À§¿¡ ¿­ ¶óº§À» ³Ö¾îÁÖÀÚ~ scroll
-    String[][] data; // 3¸íÀÇ Á¤º¸¸¦ ´ãÀ» 2Â÷¿ø ¹è¿­À» »ı¼ºÇÑ´Ù.
-    String[] title = { "¹øÈ£", "·¹½ÃÇÇ ÀÌ¸§", "Àç·áÀÏÄ¡ºñÀ²", "ÁÁ¾Æ¿ä" }; // ÄÃ·³ÀÇ Á¦¸ñ Á¤º¸¸¦ Ç¥ÇöÇÒ 1Â÷¿ø
-                                                           // ¹è¿­
-
-    data = new String[35][4];
-
-    table = new JTable(data, title); // table=new JTable(µ¥ÀÌÅÍ-2Â÷¿ø¹è¿­, ÄÃ·³¹è¿­);
-    scroll = new JScrollPane(table);
+    // í…Œì´ë¸” ìƒì„±
+    JScrollPane scroll; // í…Œì´ë¸” ìœ„ì— ì—´ ë¼ë²¨ì„ ë„£ì–´ì£¼ì~ scroll
+    this.table = searchRecipeManager.newJTable();
+    scroll = new JScrollPane(this.table);
     rightPanel.add(scroll);
+    searchRecipeManager.setJTable(this.table);
 
-    serchRecipeManager.setJTable(table);
     con.add(initPanel);
 
     setVisible(true);
     setSize(1000, 700);
+    table.addMouseListener(new MouseAdapter() {
 
+      public void mouseClicked(MouseEvent e) {
+        String message = "ê²°ê³¼ì—†ìŒ";
+        if (e.getClickCount() == 1) {
+          JTable target = (JTable) e.getSource();
+          int row = target.getSelectedRow();
+          int column = target.getSelectedColumn();
+          String data = (String) target.getValueAt(row, column);// ex"ë¶€ëŒ€ì°Œê°œ"
+          for (int i = 0; i < resultlist.size(); i++) {
+            if (resultlist.get(i).getRecipeName().equals(data)) {
+              message = resultlist.get(i).getRecipe();
+              System.out.println("data" + data);
+              System.out.println("resultlist.get(i).getRecipeName()" + resultlist.get(i).getRecipeName());
+
+            }
+          }
+          RecipeDialog recipeDialog = new RecipeDialog(frame, message);
+          recipeDialog.setVisible(true);
+
+        }
+      }
+    });
   }
 
   // search with Vector
-  public class OkButtonListener implements ActionListener {
+  public class SelectButtonListener implements ActionListener {
     private IngredientView ingredientView;
     private RecipeView recipeView;
     private Vector<IngredientInfo> selectlist;
-    Vector<RecipeInfo> resultlist;
+    private JTable table;
 
-    public OkButtonListener(IngredientView ingredientView, RecipeView recipeView) throws IOException {
+    public SelectButtonListener(IngredientView ingredientView, RecipeView recipeView) throws IOException {
       this.ingredientView = ingredientView;
       this.recipeView = recipeView;
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
       try {
-        ingredientView.clearSelectlist(); // ±âÁ¸ selectlist.txt ÃÊ±âÈ­
+        ingredientView.clearSelectlist(); // ê¸°ì¡´ selectlist.txt ì´ˆê¸°í™”
+
       } catch (IOException e2) {
         e2.printStackTrace();
-      } 
+      }
       ingredientView.setSelectlist(pig);
       ingredientView.setSelectlist(beef);
       ingredientView.setSelectlist(chicken);
@@ -305,29 +324,20 @@ public class InitPanel extends JFrame {
       ingredientView.setSelectlist(spinach);
 
       try {
-        this.selectlist = ingredientView.getSelectlist();
-        // System.out.println(selectlist); //test
+        resultlist = recipeView.search(ingredientView.getSelectlist());
       } catch (IOException e1) {
-
+        // TODO Auto-generated catch block
         e1.printStackTrace();
       }
-      resultlist = recipeView.search(selectlist);
-      recipeView.showTableData(resultlist, serchRecipeManager.getJTable()); // ¼±ÅÃÇÑ Àç·á·Î ·¹½ÃÇÇ¸¦ °Ë»öÇÏ°í °á°ú ¸®½ºÆ®¸¦ Ãâ·ÂÇÑ´Ù.
+      table = searchRecipeManager.getJTable();
+      recipeView.clearTableData(table);
+      recipeView.showTableData(resultlist, table); // ì„ íƒí•œ ì¬ë£Œë¡œ ë ˆì‹œí”¼ë¥¼ ê²€ìƒ‰í•˜ê³  ê²°ê³¼ ë¦¬ìŠ¤íŠ¸ë¥¼
+                                                   // ì¶œë ¥í•œë‹¤.
+      // resultlist.elementAt(3).getRecipeName() // test
     }
   }
 
-  // search with hashmap method
-  public class SearchButtonListener implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      serchRecipeManager.initialize();
-      serchRecipeManager.getHashmap().getRecipeNameInHashmap(serchTextField.getText(), serchRecipeManager.getJTable(),
-          frame);
-
-    }
-  }
-
+  // sort with a number of likes
   public class likeButtonListener implements ActionListener {
     RecipeView recipeView;
     JTable table;
@@ -341,9 +351,24 @@ public class InitPanel extends JFrame {
     @Override
     public void actionPerformed(ActionEvent e) {
       resultlist = recipeView.sortLike(table);
-      //recipeView.showTableData(resultlist);
+      // recipeView.showTableData(resultlist);
     }
 
+  }
+
+  // search with hashmap method
+  public class SearchButtonListener implements ActionListener {
+
+    Recipe recipelist;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      searchRecipeManager.initialize();
+      resultlist = searchRecipeManager.getHashmap().getRecipeNameInHashmap(serchTextField.getText(),
+          searchRecipeManager.getJTable(), frame);
+      System.out.println(resultlist.get(0).getRecipeName());
+
+    }
   }
 
 }

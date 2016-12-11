@@ -10,45 +10,45 @@ import valueObject.*;
 
 
 public class Type {
-	private Vector<TypeInfo> typelist;
-	public Type(){
+   private Vector<TypeInfo> typelist;
+   public Type(){
 
-		try {
-			BufferedWriter fileWriter = new BufferedWriter(new FileWriter("type.txt"));
-			fileWriter.write(1);
-			fileWriter.write("Àå·ù");
-			fileWriter.newLine();
-			fileWriter.write(2);
-			fileWriter.write("°í±â·ù");
-			fileWriter.newLine();
-			fileWriter.write(3);
-			fileWriter.write("ÇØ»ê¹°");
-			fileWriter.newLine();
-			fileWriter.write(4);
-			fileWriter.write("Ã¤¼Ò·ù");
-			fileWriter.newLine();
-			fileWriter.write(5);
-			fileWriter.write("Á¶¹Ì·á");
+      try {
+         BufferedWriter fileWriter = new BufferedWriter(new FileWriter("type.txt"));
+         fileWriter.write(1);
+         fileWriter.write("ìž¥ë¥˜");
+         fileWriter.newLine();
+         fileWriter.write(2);
+         fileWriter.write("ê³ ê¸°ë¥˜");
+         fileWriter.newLine();
+         fileWriter.write(3);
+         fileWriter.write("í•´ì‚°ë¬¼");
+         fileWriter.newLine();
+         fileWriter.write(4);
+         fileWriter.write("ì±„ì†Œë¥˜");
+         fileWriter.newLine();
+         fileWriter.write(5);
+         fileWriter.write("ì¡°ë¯¸ë£Œ");
       fileWriter.newLine();
       fileWriter.write(6);
-      fileWriter.write("³ª¹°·ù");
+      fileWriter.write("ë‚˜ë¬¼ë¥˜");
       fileWriter.newLine();
-			
-			fileWriter.close();
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public Vector<TypeInfo> getList() {
-		try {
-			
-			BufferedReader fileReader = new BufferedReader(new FileReader("type.txt"));
-			typelist = new Vector<TypeInfo>();
-			int num = 1;
-			String line;
+         
+         fileWriter.close();
+         
+         
+      } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+   }
+   public Vector<TypeInfo> getList() {
+      try {
+         
+         BufferedReader fileReader = new BufferedReader(new FileReader("type.txt"));
+         typelist = new Vector<TypeInfo>();
+         int num = 1;
+         String line;
       for(int i = 0; num != -1; i++){
         num = fileReader.read();
         line = fileReader.readLine();
@@ -60,13 +60,12 @@ public class Type {
           break;
         }
       }
-			
-			fileReader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return typelist;
-	}
+         
+         fileReader.close();
+      } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      return typelist;
+   }
 }
-

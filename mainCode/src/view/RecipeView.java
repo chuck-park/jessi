@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.table.*;
 
 import control.*;
 import valueObject.*;
@@ -11,35 +12,53 @@ import valueObject.*;
 public class RecipeView {
   private RecipeManager recipeManager;
   private IngredientManager ingredientManager;
-  
-  public RecipeView() throws IOException{
+
+  public RecipeView() throws IOException {
     this.recipeManager = new RecipeManager();
     this.ingredientManager = new IngredientManager();
-    //recipeManager.getLikelist();
-    //recipeManager.sortLike();
+    // recipeManager.getLikelist();
+    // recipeManager.sortLike();
   }
-  
+
   public void showTableData(Vector<RecipeInfo> resultlist, JTable table) {
     int j = 0;
+
     for (int i = 0; i < resultlist.size(); i++) {
-        //System.out.println("i : " + i); System.out.println("j : " + j); // test
-        table.setValueAt(Integer.toString(i+1), i, j); // Integer.toString(i) == String.valueOf(i)
-        table.setValueAt(resultlist.get(i).getRecipeName(), i, j+1); // ·¹½ÃÇÇ ÀÌ¸§
-        table.setValueAt(String.valueOf(((float)(resultlist.get(i).getCount()) / 
-            (float)(resultlist.get(i).getTotal())) * 100 + "%"), i, j+2); // Àç·áÀÏÄ¡ºñÀ²
-        table.setValueAt(String.valueOf(resultlist.get(i).getLike()), i, j+3); // ÁÁ¾Æ¿ä
+      // System.out.println("i : " + i); System.out.println("j : " + j); // test
+      table.setValueAt(Integer.toString(i + 1), i, j); // Integer.toString(i) ==
+                                                       // String.valueOf(i)
+      table.setValueAt(resultlist.get(i).getRecipeName(), i, j + 1); // ë ˆì‹œí”¼ ì´ë¦„
+      table.setValueAt(
+          String.valueOf(((float) (resultlist.get(i).getCount()) / (float) (resultlist.get(i).getTotal())) * 100 + "%"),
+          i, j + 2); // ìž¬ë£Œì¼ì¹˜ë¹„ìœ¨
+      table.setValueAt(String.valueOf(resultlist.get(i).getLike()), i, j + 3); // ì¢‹ì•„ìš”
+
     }
   }
   
+  public void clearTableData(JTable table) {
+    int j = 0;
+
+    for (int i = 0; i < 35; i++) {
+      // System.out.println("i : " + i); System.out.println("j : " + j); // test
+      table.setValueAt("", i, j); // Integer.toString(i) ==
+                                                       // String.valueOf(i)
+      table.setValueAt("", i, j + 1); // ë ˆì‹œí”¼ ì´ë¦„
+      table.setValueAt("", i, j + 2); // ìž¬ë£Œì¼ì¹˜ë¹„ìœ¨
+      table.setValueAt("", i, j + 3); // ì¢‹ì•„ìš”
+
+    }
+  }
+
   public Vector<RecipeInfo> search(Vector<IngredientInfo> selectlist) {
     return recipeManager.search(selectlist);
   }
-  
-  public void getLikelist(){
+
+  public void getLikelist() {
     recipeManager.getLikelist();
   }
-  
-  public Vector<RecipeInfo> sortLike(JTable table){
+
+  public Vector<RecipeInfo> sortLike(JTable table) {
     return recipeManager.sortLike(table);
   }
 }

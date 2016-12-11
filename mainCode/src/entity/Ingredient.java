@@ -15,109 +15,109 @@ public class Ingredient {
     try {
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter("ingredient.txt"));
 
-        fileWriter.write("µÅÁö°í±â");
+        fileWriter.write("ë¼ì§€ê³ ê¸°");
         fileWriter.newLine();
         
-        fileWriter.write("¼Ò°í±â");
+        fileWriter.write("ì†Œê³ ê¸°");
         fileWriter.newLine();
         
-        fileWriter.write("´ß°í±â");
+        fileWriter.write("ë‹­ê³ ê¸°");
         fileWriter.newLine();
         
-        fileWriter.write("°íÃßÀå");
+        fileWriter.write("ê³ ì¶”ì¥");
         fileWriter.newLine();
         
-        fileWriter.write("°£Àå");
+        fileWriter.write("ê°„ì¥");
         fileWriter.newLine();
         
-        fileWriter.write("µÈÀå");
+        fileWriter.write("ëœì¥");
         fileWriter.newLine();
         
-        fileWriter.write("°¡Áö");
+        fileWriter.write("ê°€ì§€");
         fileWriter.newLine();
         
-        fileWriter.write("¹ö¼¸");
+        fileWriter.write("ë²„ì„¯");
         fileWriter.newLine();
         
-        fileWriter.write("´ç±Ù");
+        fileWriter.write("ë‹¹ê·¼");
         fileWriter.newLine();
 
-        fileWriter.write("È£¹Ú");
+        fileWriter.write("í˜¸ë°•");
         fileWriter.newLine();
 
-        fileWriter.write("ÆÄÇÁ¸®Ä«");
+        fileWriter.write("íŒŒí”„ë¦¬ì¹´");
         fileWriter.newLine();
         
-        fileWriter.write("¸¶´Ã");
+        fileWriter.write("ë§ˆëŠ˜");
         fileWriter.newLine();
         
-        fileWriter.write("¾çÆÄ");
+        fileWriter.write("ì–‘íŒŒ");
         fileWriter.newLine();
 
-        fileWriter.write("°íÃß");
+        fileWriter.write("ê³ ì¶”");
         fileWriter.newLine();
 
-        fileWriter.write("»ı°­");
+        fileWriter.write("ìƒê°•");
         fileWriter.newLine();
 
-        fileWriter.write("ÆÄ");
+        fileWriter.write("íŒŒ");
         fileWriter.newLine();
 
-        fileWriter.write("°íµî¾î");
+        fileWriter.write("ê³ ë“±ì–´");
         fileWriter.newLine();
 
-        fileWriter.write("¹Ì¿ª");
+        fileWriter.write("ë¯¸ì—­");
         fileWriter.newLine();
 
-        fileWriter.write("È«ÇÕ");
+        fileWriter.write("í™í•©");
         fileWriter.newLine();
 
-        fileWriter.write("¹ÙÁö¶ô");
+        fileWriter.write("ë°”ì§€ë½");
         fileWriter.newLine();
 
-        fileWriter.write("¿ÀÂ¡¾î");
+        fileWriter.write("ì˜¤ì§•ì–´");
         fileWriter.newLine();
 
-        fileWriter.write("»õ¿ì");
+        fileWriter.write("ìƒˆìš°");
         fileWriter.newLine();
         
-        fileWriter.write("²É°Ô");
+        fileWriter.write("ê½ƒê²Œ");
         fileWriter.newLine();
 
-        fileWriter.write("°¥Ä¡");
+        fileWriter.write("ê°ˆì¹˜");
         fileWriter.newLine();
 
-        fileWriter.write("¼³ÅÁ");
+        fileWriter.write("ì„¤íƒ•");
         fileWriter.newLine();
 
-        fileWriter.write("¼Ò±İ");
+        fileWriter.write("ì†Œê¸ˆ");
         fileWriter.newLine();
 
-        fileWriter.write("ÈÄÃß");
+        fileWriter.write("í›„ì¶”");
         fileWriter.newLine();
 
-        fileWriter.write("°íÃå°¡·ç");
+        fileWriter.write("ê³ ì¶§ê°€ë£¨");
         fileWriter.newLine();
 
-        fileWriter.write("¹°¿³");
+        fileWriter.write("ë¬¼ì—¿");
         fileWriter.newLine();
 
-        fileWriter.write("½ÄÃÊ");
+        fileWriter.write("ì‹ì´ˆ");
         fileWriter.newLine();
 
-        fileWriter.write("±¼¼Ò½º");
+        fileWriter.write("êµ´ì†ŒìŠ¤");
         fileWriter.newLine();
 
-        fileWriter.write("Äá³ª¹°");
+        fileWriter.write("ì½©ë‚˜ë¬¼");
         fileWriter.newLine();
 
-        fileWriter.write("¼÷ÁÖ³ª¹°");
+        fileWriter.write("ìˆ™ì£¼ë‚˜ë¬¼");
         fileWriter.newLine();
 
-        fileWriter.write("°í»ç¸®");
+        fileWriter.write("ê³ ì‚¬ë¦¬");
         fileWriter.newLine();
 
-        fileWriter.write("½Ã±İÄ¡");
+        fileWriter.write("ì‹œê¸ˆì¹˜");
         fileWriter.newLine();
         
       fileWriter.close();
@@ -159,7 +159,7 @@ public class Ingredient {
       if(checkBox.isSelected()){
         fileWriter.write(checkBox.getText());
         fileWriter.newLine();
-        //System.out.println(checkBox.getText() + "ÀÌ(°¡) selectlist¿¡ Ãß°¡µÇ¾ú½À´Ï´Ù."); // test
+        //System.out.println(checkBox.getText() + "ì´(ê°€) selectlistì— ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤."); // test
       }
       
       fileWriter.close();
@@ -179,7 +179,7 @@ public class Ingredient {
         line = fileReader.readLine();
         if(line != null){
           selectlist.add(new IngredientInfo(line));
-          //System.out.println(line); // °¡Á®¿À´Â Àç·á¸ñ·Ï Ãâ·Â Å×½ºÆ®
+          //System.out.println(line); // ê°€ì ¸ì˜¤ëŠ” ì¬ë£Œëª©ë¡ ì¶œë ¥ í…ŒìŠ¤íŠ¸
         }else {
           break;
         }

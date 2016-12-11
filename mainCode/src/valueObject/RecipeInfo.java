@@ -4,23 +4,27 @@ import java.util.*;
 
 public class RecipeInfo {
   private String recipeName;
+  private String recipe;
   private Vector<String> ingredient;
-  private int like; // ÃßÃµ¼ø Á¤·ÄÀ» À§ÇÑ like º¯¼ö
+  private int like; // ï¿½ï¿½Ãµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ like ï¿½ï¿½ï¿½ï¿½
   private int count;
   private int total; 
   
-  public RecipeInfo (String recipeName, int total, Vector<String> ingredient){
+  public RecipeInfo (String recipeName, int total, Vector<String> ingredient, String recipe){
     this.recipeName = recipeName;
     this.ingredient = ingredient;
     this.total = total;
     this.like = 0;
     this.count = 0;
+    this.recipe = recipe;
   }
 
   public String getRecipeName() {
     return recipeName;
   }
-
+  public String getRecipe() {
+	    return recipe;
+	  }
   public void setRecipeName(String recipeName) {
     this.recipeName = recipeName;
   }
