@@ -43,11 +43,13 @@ public class InitPanel extends JFrame {
 
   JTable table;
   String colName[] = { "순번", "레시피 이름", "정확도", "좋아요 수" };
+  RecipeDialog recipeDialog;
 
   private SelectButtonListener selectButtonListener;
   private SearchButtonListener searchButtonListener;
   private NameSortButtonListener nameSortButtonListener;
   private LikeSortButtonListener likeSortButtonListener;
+  private AccuracySortButtonListener accuracySortButtonListener;
 
   public JCheckBox pig;
   public JCheckBox beef;
@@ -100,6 +102,7 @@ public class InitPanel extends JFrame {
     selectButtonListener = new SelectButtonListener(ingredientView, recipeView);
     nameSortButtonListener = new NameSortButtonListener(recipeView);
     likeSortButtonListener = new LikeSortButtonListener(recipeView);
+    accuracySortButtonListener = new AccuracySortButtonListener(recipeView);
     searchButtonListener = new SearchButtonListener();
 
     initPanel.setLayout(new BorderLayout());
@@ -220,11 +223,11 @@ public class InitPanel extends JFrame {
 
     rightPanel.setLayout(new BorderLayout());
     sortButtonPanel.setLayout(new FlowLayout());
-    
+
     // 각 버튼에 리스너 붙이기
-    selectButton.addActionListener(selectButtonListener); 
+    selectButton.addActionListener(selectButtonListener);
     searchButton.addActionListener(searchButtonListener);
-    accuracySortButton.addActionListener(selectButtonListener);
+    accuracySortButton.addActionListener(accuracySortButtonListener);
     nameSortButton.addActionListener(nameSortButtonListener);
     likeSortButton.addActionListener(likeSortButtonListener);
 
@@ -247,9 +250,10 @@ public class InitPanel extends JFrame {
 
     setVisible(true);
     setSize(1000, 700);
+    
     table.addMouseListener(new MouseAdapter() {
-
       public void mouseClicked(MouseEvent e) {
+        int check = 0;
         String message = "결과없음";
         if (e.getClickCount() == 1) {
           JTable target = (JTable) e.getSource();
@@ -261,15 +265,17 @@ public class InitPanel extends JFrame {
               message = resultlist.get(i).getRecipe();
               System.out.println("data" + data);
               System.out.println("resultlist.get(i).getRecipeName()" + resultlist.get(i).getRecipeName());
-
+              check = i;
             }
           }
-          RecipeDialog recipeDialog = new RecipeDialog(frame, message);
-          recipeDialog.setVisible(true);
-
+          if (message != "결과없음") {
+            recipeDialog = new RecipeDialog(frame, message, check, resultlist, recipeView); // 선택한 리스트를
+            recipeDialog.setVisible(true);
+          }
         }
       }
     });
+    
   }
 
   // search with Vector
@@ -336,20 +342,37 @@ public class InitPanel extends JFrame {
         // TODO Auto-generated catch block
         e1.printStackTrace();
       }
+      resultlist = recipeView.accuracySort(resultlist);
       table = searchRecipeManager.getJTable();
       recipeView.clearTableData(table);
       recipeView.showTableData(resultlist, table); // 선택한 재료로 레시피를 검색하고 결과 리스트를
-                                                     // 출력한다.
-      // resultlist.elementAt(3).getRecipeName() // test
+                                                   // 출력한다.
     }
   }
-  
+
+  // sort with accuracy
+  public class AccuracySortButtonListener implements ActionListener {
+    RecipeView recipeView;
+    public AccuracySortButtonListener(RecipeView recipeView){
+      this.recipeView = recipeView;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      table = searchRecipeManager.getJTable();
+      resultlist = recipeView.accuracySort(resultlist);
+      recipeView.clearTableData(table);
+      recipeView.showTableData(resultlist, table);
+    }
+  }
+  // sort with name
   public class NameSortButtonListener implements ActionListener {
     RecipeView recipeView;
-    
+
     public NameSortButtonListener(RecipeView recipeView) {
       this.recipeView = recipeView;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
       table = searchRecipeManager.getJTable();
@@ -357,9 +380,9 @@ public class InitPanel extends JFrame {
       recipeView.clearTableData(table);
       recipeView.showTableData(resultlist, table);
     }
-    
+
   }
-  
+
   // sort with a number of likes
   public class LikeSortButtonListener implements ActionListener {
     RecipeView recipeView;
@@ -375,7 +398,6 @@ public class InitPanel extends JFrame {
       recipeView.clearTableData(table);
       recipeView.showTableData(resultlist, table);
     }
-
   }
 
   // search with hashmap method

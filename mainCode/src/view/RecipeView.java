@@ -63,4 +63,8 @@ public class RecipeView {
   public Vector<RecipeInfo> nameSort(Vector<RecipeInfo> resultlist){
     return recipeManager.nameSort(resultlist);
  }
+
+  public Vector<RecipeInfo> accuracySort(Vector<RecipeInfo> resultlist) {
+    return recipeManager.accuracySort(resultlist);
+  }
 }

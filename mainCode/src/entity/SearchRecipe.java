@@ -29,7 +29,7 @@ public Vector<RecipeInfo> getRecipeNameInHashmap(String recipeName, JTable table
     	  }
           table.setValueAt("1", 0, 0);
           table.setValueAt(recipeName, 0, 1);
-          table.setValueAt("100%", 0, 2);
+          table.setValueAt("", 0, 2);
           
        }else  {
          JOptionPane.showMessageDialog(frame, "요리명 "+recipeName+"이(가) 존재하지 않습니다.");

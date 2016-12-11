@@ -38,7 +38,7 @@ public class Recipe {
       + "<br><br>3. 통조림 햄은 0.5cm 두깨로 썰고 소시지는 어슷 썬다. 다진 돼지고기는 청주 1큰술과 후춧가루 약간에 버무려 재운다.<br>"
       + "<br><br>4. 대파는 어슷 썰고 양파는 채 썬다.<br>" + "<br><br>5. 냄비에 햄, 소시지, 다진 돼지고기, 김치, 떡국떡, 양파, 대파, 삶은 마카로니, 통조림 콩을 넣는다."
       + "<br>(떡국떡은 물에 담가 두었다가 넣는다.)<br>" + "<br><br>6. 양념과 육수를 넣고 끓인다.(간이 부족하면 소금으로 간한다.)<br></html>";
-  String b = " <html><br><br>연근조림<br><br><br>1. 연근 껍질은 벗기고 0.5cm 두께로 썬다. 냄비에 물 1컵(200ml), 식초, 연근을 넣고 연근이 반쯤 익을 때까지 데친다."
+  String b = "<html><br><br>연근조림<br><br><br>1. 연근 껍질은 벗기고 0.5cm 두께로 썬다. 냄비에 물 1컵(200ml), 식초, 연근을 넣고 연근이 반쯤 익을 때까지 데친다."
       + "<br> 체에 밭쳐 물기를 뺀다.(연근을 식촛물에 데처내어 아린맛을 없애고 조리는 시간을 줄일 수 있다.)<br>"
       + "<br><br>2. 냄비에 물 1컵(200ml)과 양념 재료, 연근을 넣고 조린다."
       + "<br><br><br>3. 국물이 거의 없어질 때까지 조린 뒤 불을 끄고 참기름과 통깨를 넣고 버무린다.</html>";
@@ -62,7 +62,7 @@ public class Recipe {
           + "<br>. 두부는 사방 2cm 크기로 깍뚝 썰고 애호박은 0.5cm 두께로 4등분한다. 청양고추와 대파는 송송 썬다. " + "<br>팽이버섯은 밑동을 제거한 후 가닥가닥 뜯는다."
           + "<br><br><br>2. 냄비에 멸치 국물을 붓고 체에 된장을 올려 풀어준다." + "<br><br><br>3. 무를 넣고 푹 익도록 끓인다."
           + "<br><br><br>4. 대파, 버섯, 고춧가루를 넣고 한소끔 끓인다.(중간 중간에 떠오르는 거품을 걷어낸다.)</html>",
-      f = " <html><br><br>갈치조림" + "<br><br><br>1. 갈치는 지느러미와 내장을 제거하고 4~5토막으로 썬다. 칼로 비늘을 긁어 흐르는 물에 헹군다. "
+      f = "<html><br><br>갈치조림" + "<br><br><br>1. 갈치는 지느러미와 내장을 제거하고 4~5토막으로 썬다. 칼로 비늘을 긁어 흐르는 물에 헹군다. "
           + "<br>대파, 마늘, 생강은 가늘게 채 썬다." + "<br><br><br>2. 작은 볼에 양념 재료와 01의 대파, 마늘, 생강을 넣어 골고루 섞는다."
           + "<br><br><br>3. 무는 3×3cm 크기로 납작하게 썬다. 냄비에 무를 깐다."
           + "<br><br><br>4. 무 위에 02의 양념 1/2분량을 붓고 그위에 갈치를 올린다. 남은 양념 1/2분량을 붓는다."
@@ -291,9 +291,9 @@ public class Recipe {
     ingredientlist20.add("무");
     ingredientlist20.add("다시다");
 
-    recipelist.add(new RecipeInfo("부대찌개", 5, ingredientlist1, a, 3));
-    recipelist.add(new RecipeInfo("연근조림", 4, ingredientlist2, b, 4));
-    recipelist.add(new RecipeInfo("낚지볶음", 4, ingredientlist3, c, 5));
+    recipelist.add(new RecipeInfo("부대찌개", 5, ingredientlist1, a));
+    recipelist.add(new RecipeInfo("연근조림", 4, ingredientlist2, b));
+    recipelist.add(new RecipeInfo("낚지볶음", 4, ingredientlist3, c));
     recipelist.add(new RecipeInfo("배추김치", 3, ingredientlist4, d));
     recipelist.add(new RecipeInfo("된장찌개", 5, ingredientlist5, e));
     recipelist.add(new RecipeInfo("갈치조림", 5, ingredientlist6, f));
@@ -440,11 +440,29 @@ public class Recipe {
 
     return i;
   }
-
+  
+  // likeSort
   public Vector<RecipeInfo> likeSort(Vector<RecipeInfo> resultlist) {
-    Vector<RecipeInfo> likelist = resultlist;
+    likelist = resultlist;
     quickSort(this.likelist, 0, this.likelist.size() - 1);
     return this.likelist;
+  }
+  // accuracySort
+  public Vector<RecipeInfo> accuracySort(Vector<RecipeInfo> resultlist) {
+    Vector<RecipeInfo> accuracylist = resultlist;
+    
+    for (int i = 0; i < accuracylist.size() - 1; i++) {
+      for (int j = i + 1; j < accuracylist.size(); j++) {
+        if( (((float)(resultlist.get(i).getCount()) / (float)(resultlist.get(i).getTotal())) * 100) <
+              (((float)(resultlist.get(j).getCount()) / (float)(resultlist.get(j).getTotal())) * 100) ){
+          Vector<RecipeInfo> temp = new Vector<RecipeInfo>();
+          temp.add(0, accuracylist.get(i));
+          accuracylist.set(i, accuracylist.get(j));
+          accuracylist.set(j, temp.get(0));
+        }
+      }
+    }
+    return accuracylist;
   }
 
 }
