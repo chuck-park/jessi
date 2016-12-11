@@ -264,9 +264,12 @@ public class InitPanel extends JFrame {
 
             }
           }
-          RecipeDialog recipeDialog = new RecipeDialog(frame, message);
-          recipeDialog.setVisible(true);
-
+          if( message != "결과없음"){
+        	  RecipeDialog recipeDialog = new RecipeDialog(frame, message);
+              recipeDialog.setVisible(true);
+  
+          }
+          
         }
       }
     });
